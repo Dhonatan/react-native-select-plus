@@ -133,35 +133,6 @@ class Select extends React.Component {
               </View>
             </TouchableWithoutFeedback>
           )}
-          <View
-            style={{
-              flex: 1,
-              flexDirection: "row",
-              justifyContent: "flex-end",
-              alignItems: "center"
-            }}
-          >
-            <TouchableWithoutFeedback onPress={this._reset.bind(this)}>
-              <Icon
-                name="ios-close"
-                style={{
-                  color: "black",
-                  fontSize: 26,
-                  marginRight: 15
-                }}
-              />
-            </TouchableWithoutFeedback>
-            <TouchableWithoutFeedback onPress={this._onPress.bind(this)}>
-              <Icon
-                name="md-arrow-dropdown"
-                style={{
-                  color: "black",
-                  fontSize: 24,
-                  marginRight: 5
-                }}
-              />
-            </TouchableWithoutFeedback>
-          </View>
         </View>
         {this.state.show_options && (
           <Items
