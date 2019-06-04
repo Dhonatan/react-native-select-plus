@@ -33,6 +33,7 @@ class Items extends React.Component {
     super(props);
   }
 
+
   render() {
     const {
       items,
@@ -58,15 +59,15 @@ class Items extends React.Component {
           <Text style={{ fontWeight: "bold" }}>{item.label}</Text>
         </View>
       ) : (
-        <TouchableWithoutFeedback
-          onPress={() => onPress(item.key, item.label)}
-          key={idx}
-        >
-          <View style={{ padding: 5 }}>
-            <Text style={{ marginLeft: 20 }}>{item.label}</Text>
-          </View>
-        </TouchableWithoutFeedback>
-      );
+          <TouchableWithoutFeedback
+            onPress={() => onPress(item.key, item.label)}
+            key={idx}
+          >
+            <View style={{ padding: 5 }}>
+              <Text style={{ marginLeft: 20 }}>{item.label}</Text>
+            </View>
+          </TouchableWithoutFeedback>
+        );
     });
 
     return (
@@ -77,7 +78,7 @@ class Items extends React.Component {
         onRequestClose={handleClose}
       >
         <Overlay onPress={handleClose} />
-        <View style={[styles.container, { left: x, top: y, width: width }]}>
+        <View style={[styles.container, { left: Dimensions.get("window").width * 0.10, top: y, width: Dimensions.get("window").width * 0.8 }]}>
           <View
             style={{
               height: height,
@@ -93,25 +94,17 @@ class Items extends React.Component {
                 alignItems: "center"
               }}
             >
-              <Icon
-                name="ios-search"
-                style={{
-                  color: "black",
-                  fontSize: 26,
-                  marginLeft: 5,
-                  flex: 1
-                }}
-              />
               <TextInput
                 onChangeText={onChangeText}
                 placeholder={placeholder}
                 underlineColorAndroid="transparent"
-                style={{ flex: 5, margin: 0, padding: 0 }}
+                style={{ flex: 5, paddingLeft: 15 }}
+                autoFocus={true}
               />
             </View>
           </View>
           <ScrollView
-            style={{ width: width - 2, height: height * 3 }}
+            style={{ width: Dimensions.get("window").width * 0.8, height: height * 3 }}
             automaticallyAdjustContentInsets={false}
             bounces={false}
           >
@@ -130,7 +123,7 @@ Items.propTypes = {
 Items.defaultProps = {
   width: 0,
   height: 0,
-  onPress: () => {}
+  onPress: () => { }
 };
 
 module.exports = Items;
