@@ -3,20 +3,14 @@ import PropTypes from "prop-types";
 import {
   Dimensions,
   StyleSheet,
-  Component,
   TouchableWithoutFeedback,
   View,
-  TextInput,
-  Modal
 } from "react-native";
-import Icon from "react-native-vector-icons/Ionicons";
 
 const Option = require("./option");
 const Items = require("./items");
 
 const window = Dimensions.get("window");
-
-const SELECT = "SELECT";
 
 const styles = StyleSheet.create({
   container: {
@@ -35,7 +29,7 @@ class Select extends React.Component {
     this.state = {
       value: this.props.initKey
         ? this.props.data.filter(item => item.key === this.props.initKey)[0]
-            .label
+          .label
         : this.props.placeholder,
       show_options: false,
       search_text: ""
@@ -55,7 +49,7 @@ class Select extends React.Component {
     this._select.measure((width, height, px, py, fx, fy) => {
       const location = {
         fx: fx,
-        fy: fy,
+        fy: this.state.show_options ? Dimensions.get("window").height * 0.30 : 0,
         px: px,
         py: py,
         width: width,
@@ -71,6 +65,7 @@ class Select extends React.Component {
         this.props.parentScrollDisable();
       }
     }
+
   }
 
   _handleSelect(key, label) {
@@ -106,9 +101,20 @@ class Select extends React.Component {
       search
     } = this.props;
     const dimensions = { width, height };
-
     return (
-      <View>
+
+
+      <View style={{ marginTop: this.state.show_options ? 0 : Dimensions.get("window").height * 0.13 }}>
+        {this.state.show_options &&
+          <View style={{
+            alignSelf: 'center',
+            width: Dimensions.get("window").width,
+            marginTop: Dimensions.get("window").width * -0.99,
+            height: Dimensions.get("window").height * 1.1,
+            backgroundColor: 'black',
+            opacity: 0.85
+          }} />
+        }
         <View
           ref={ref => {
             this._select = ref;
@@ -168,7 +174,7 @@ Select.propTypes = {
 Select.defaultProps = {
   width: 200,
   height: 40,
-  onSelect: () => {},
+  onSelect: () => { },
   search: true,
   initKey: 0,
   placeholder: "Select",
